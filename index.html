@@ -142,19 +142,19 @@
     const subtitles = ["Everything comes back to you.", "You're the one I've waited for.", "You shine brighter than the stars.", "You are the reason I breathe.", "I'll never let you go, ever.", "More than words can ever say.", "My heart beats only for you.", "Wherever you are, that's home.", "It has always been you."];
 
     const list = document.getElementById('slides-list');
-    photoIDs.forEach((id, i) => {
-        // MENGGUNAKAN IMAGE PROXY AGAR BYPASS BLOKIR GOOGLE
-        const imgUrl = `https://images1-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&refresh=2592000&url=https://drive.google.com/uc?id=${id}`;
-        
-        list.innerHTML += `
-            <div class="swiper-slide">
-                <img src="${imgUrl}" alt="Slide">
-                <div class="overlay">
-                    <h2>${titles[i]}</h2>
-                    <p>${subtitles[i]}</p>
-                </div>
-            </div>`;
-    });
+photoIDs.forEach((id, i) => {
+    // BARIS PERUBAHAN:
+    const imgUrl = `https://lh3.googleusercontent.com/u/0/d/${id}=s1600`;
+    
+    list.innerHTML += `
+        <div class="swiper-slide">
+            <img src="${imgUrl}" alt="Slide">
+            <div class="overlay">
+                <h2>${titles[i]}</h2>
+                <p>${subtitles[i]}</p>
+            </div>
+        </div>`;
+});
 
     const swiper = new Swiper('.swiper', {
         loop: true,
@@ -182,3 +182,4 @@
 </script>
 </body>
 </html>
+

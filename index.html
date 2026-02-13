@@ -125,7 +125,9 @@
     </div>
 </div>
 
-<div id="yt-player"></div>
+<audio id="my-audio" loop preload="auto">
+    <source src="https://api.weserv.nl/?url=https://drive.google.com/uc?id=1yT_02yhwb-CjWZJCTrsISdY3_p-mF8zh" type="audio/mp3">
+</audio>
 
 <div class="phone-container">
     <div class="swiper">
@@ -191,25 +193,20 @@
         autoplay: false,
     });
 
-    let player;
-    function onYouTubeIframeAPIReady() {
-        player = new YT.Player('yt-player', {
-            height: '1', width: '1',
-            videoId: '0dLezZIZOAQ',
-            playerVars: { 'autoplay': 0, 'controls': 0, 'loop': 1, 'playlist': '0dLezZIZOAQ' },
-            events: { 'onReady': onPlayerReady }
-        });
-    }
-    
-    function onPlayerReady(event) {
-        document.getElementById('start-btn').addEventListener('click', function() {
-            clearInterval(heartInterval);
-            document.getElementById('welcome-screen').style.opacity = '0';
-            setTimeout(() => document.getElementById('welcome-screen').style.display = 'none', 1500);
-            player.playVideo();
-            swiper.autoplay.start({ delay: 5000 });
-        });
-    }
+    document.getElementById('start-btn').addEventListener('click', function() {
+        const audio = document.getElementById('my-audio');
+        clearInterval(heartInterval);
+        
+        audio.play(); // Putar lagu seketika
+        
+        document.getElementById('welcome-screen').style.opacity = '0';
+        setTimeout(() => {
+            document.getElementById('welcome-screen').style.display = 'none';
+        }, 1500);
+        
+        swiper.autoplay.start({ delay: 5000 });
+    });
 </script>
 </body>
 </html>
+

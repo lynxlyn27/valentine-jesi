@@ -1,417 +1,191 @@
 <!DOCTYPE html>
-
 <html lang="id">
-
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
     <title>My Love, Jesi</title>
-
     
-
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
 
-
-
     <style>
-
         body, html { 
-
             margin: 0; padding: 0; height: 100%; 
-
             background: #000; overflow: hidden; 
-
             display: flex; justify-content: center; align-items: center;
-
         }
-
-
 
         #welcome-screen {
-
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-
             background: #000; z-index: 9999; display: flex; justify-content: center; align-items: center;
-
             transition: opacity 1.5s ease;
-
         }
-
-
 
         .btn-wrapper {
-
             position: relative;
-
-            padding: 80px; /* Area partikel lebih luas */
-
+            padding: 150px; /* Area partikel lebih luas seperti yang kamu mau */
             display: flex;
-
             justify-content: center;
-
             align-items: center;
-
         }
-
         
-
-        /* Tombol Diperbesar untuk HP */
-
-       #start-btn {
+        #start-btn {
             background: none; 
             border: 1.5px solid rgba(255,255,255,0.6); 
             color: white;
             font-family: 'Cinzel', serif; 
-            /* Padding dikurangi 10% (dari 20px 50px menjadi 18px 45px) */
-            padding: 18px 45px; 
+            padding: 20px 50px; 
             letter-spacing: 3px;
             cursor: pointer; 
             text-transform: uppercase; 
-            /* Font-size dikurangi 10% (dari 1.1rem menjadi 1rem) */
-            font-size: 1rem; 
+            font-size: 1.1rem;
             z-index: 10;
             position: relative;
             transition: all 0.3s ease;
             white-space: nowrap;
         }
 
-
-
-        #start-btn:active {
-
-            transform: scale(0.95);
-
-            background: rgba(255, 255, 255, 0.1);
-
-        }
-
-
-
         .heart-particle {
-
             position: absolute;
-
             color: #ff4d4d;
-
-            font-size: 22px; /* Love sedikit lebih besar */
-
+            font-size: 22px;
             user-select: none;
-
             pointer-events: none;
-
             z-index: 5;
-
             animation: float 3s linear forwards;
-
         }
-
-
 
         @keyframes float {
-
             0% { transform: translate(0, 0) scale(0); opacity: 0; }
-
             20% { opacity: 0.8; }
-
             100% { transform: translate(var(--x), var(--y)) scale(1.2) rotate(var(--r)); opacity: 0; }
-
         }
-
-
 
         .phone-container {
-
-            width: 100%;
-
-            height: 100%;
-
-            max-width: 56.25vh; 
-
-            position: relative;
-
+            width: 100%; height: 100%;
+            max-width: 56.25vh; position: relative;
             background: #000;
-
         }
-
-
 
         .swiper { width: 100%; height: 100%; }
-
         .swiper-slide { position: relative; overflow: hidden; }
-
         .swiper-slide img { 
-
-            width: 100%; 
-
-            height: 100%; 
-
-            object-fit: cover; 
-
+            width: 100%; height: 100%; object-fit: cover; 
             filter: brightness(0.6) contrast(1.1);
-
             transition: transform 10s linear;
-
         }
-
         
-
         .swiper-slide-active img { transform: scale(1.25); }
 
-
-
-        /* Teks Cinematic Diperbesar */
-
         .overlay { 
-
             position: absolute; bottom: 18%; left: 10%; right: 10%;
-
             color: #fff; z-index: 10; text-shadow: 0 4px 15px rgba(0,0,0,1);
-
         }
-
         .overlay h2 { 
-
-            font-family: 'Cinzel', serif; 
-
-            font-size: 2.8rem; /* Ukuran judul naik signifikan */
-
-            margin: 0; 
-
-            letter-spacing: 3px; 
-
-            text-transform: uppercase;
-
+            font-family: 'Cinzel', serif; font-size: 2.8rem; 
+            margin: 0; letter-spacing: 3px; text-transform: uppercase;
             line-height: 1.1;
-
         }
-
         .overlay p { 
-
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; 
-
-            font-size: 1rem; /* Ukuran subjudul naik agar terbaca jelas */
-
-            letter-spacing: 0.5px;
-
-            opacity: 0.9; 
-
-            margin-top: 10px; 
-
-            font-weight: 400;
-
+            font-size: 1rem; letter-spacing: 0.5px;
+            opacity: 0.9; margin-top: 10px; font-weight: 400;
         }
-
-
 
         .phone-container::before, .phone-container::after {
-
             content: ""; position: absolute; left: 0; width: 100%; height: 15vh; 
-
             background: linear-gradient(to bottom, rgba(0,0,0,1), transparent); z-index: 100;
-
             pointer-events: none;
-
         }
-
         .phone-container::after { bottom: 0; transform: rotate(180deg); }
-
     </style>
-
 </head>
-
 <body>
 
-
-
 <div id="welcome-screen">
-
     <div class="btn-wrapper" id="btn-container">
-
         <button id="start-btn">Happy Valentine, Love!</button>
-
     </div>
-
 </div>
 
-
-
-<div id="yt-player"></div>
-
-
+<audio id="my-audio" loop preload="auto">
+    <source src="https://files.catbox.moe/dk9sz4.mp3" type="audio/mp3">
+</audio>
 
 <div class="phone-container">
-
     <div class="swiper">
-
         <div class="swiper-wrapper" id="slides-list"></div>
-
     </div>
-
 </div>
 
-
-
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-
-<script src="https://www.youtube.com/iframe_api"></script>
-
 <script>
-
-    // --- ANIMASI LOVE ---
-
     function createHeart() {
-
         const container = document.getElementById('btn-container');
-
         if(!container) return;
-
-        
-
         const heart = document.createElement('div');
-
         heart.innerHTML = '❤️';
-
         heart.className = 'heart-particle';
-
         
-
-        // Jangkauan terbang lebih luas
-
-        const x = (Math.random() - 0.5) * 350; 
-
-        const y = (Math.random() - 0.5) * 350; 
-
+        // Karena padding 150px, jangkauan x dan y saya naikkan ke 500
+        const x = (Math.random() - 0.5) * 500; 
+        const y = (Math.random() - 0.5) * 500; 
         const r = Math.random() * 360; 
-
         
-
         heart.style.setProperty('--x', `${x}px`);
-
         heart.style.setProperty('--y', `${y}px`);
-
         heart.style.setProperty('--r', `${r}deg`);
-
         
-
         container.appendChild(heart);
-
         setTimeout(() => { heart.remove(); }, 3000);
-
     }
-
-
 
     const heartInterval = setInterval(createHeart, 350);
 
-
-
     const photoIDs = [
-
         "1vnEP0TwaDIjVzEAnjgIq3O340RWZbGmf", "17TE6wZ3sG0Koxiv5Q1qKc8cmBBwPqFPs", 
-
         "1USeunkxMKDN53m5wldqvFesyB9PKtjR_", "1TiEsjHniIKoJr8RhOogy5nsmqkq6SKsU",
-
         "1uy1thwlNWfHs_auW91BevXV3Y5cupgPr", "160YOQqSS5Khj409IsJ--Mf7RqT1gNtPG",
-
         "1ojI2zEk9R6sOMh8KdOgCWnx4knjIfdp4", "17m10l7nUJUy-cmNGOWeyFJ-BEkhjPaVe",
-
         "1pGZKTZC39asYKcf26LJcTkNculd9BpMP"
-
     ];
 
-
-
     const titles = ["It's You", "My Only One", "Perfect Light", "The Reason", "Stay With Me", "Deepest Love", "Every Beat", "Home", "Forever You"];
-
     const subtitles = ["Everything comes back to you.", "You're the one I've waited for.", "You shine brighter than the stars.", "You are the reason I breathe.", "I'll never let you go, ever.", "More than words can ever say.", "My heart beats only for you.", "Wherever you are, that's home.", "It has always been you."];
 
-
-
     const list = document.getElementById('slides-list');
-
     photoIDs.forEach((id, i) => {
-
         list.innerHTML += `
-
             <div class="swiper-slide">
-
-                <img src="https://lh3.googleusercontent.com/d/${id}" alt="Slide">
-
+                <img src="https://api.weserv.nl/?url=https://drive.google.com/uc?id=${id}" alt="Slide">
                 <div class="overlay">
-
                     <h2>${titles[i]}</h2>
-
                     <p>${subtitles[i]}</p>
-
                 </div>
-
             </div>`;
-
     });
-
-
 
     const swiper = new Swiper('.swiper', {
-
         loop: true,
-
         effect: 'fade',
-
         fadeEffect: { crossFade: true },
-
         speed: 3000,
-
         autoplay: false,
-
     });
 
-
-
-    let player;
-
-    function onYouTubeIframeAPIReady() {
-
-        player = new YT.Player('yt-player', {
-
-            height: '1', width: '1',
-
-            videoId: '0dLezZIZOAQ',
-
-            playerVars: { 'autoplay': 0, 'controls': 0, 'loop': 1, 'playlist': '0dLezZIZOAQ' },
-
-            events: { 'onReady': onPlayerReady }
-
-        });
-
-    }
-
-    
-
-    function onPlayerReady(event) {
-
-        document.getElementById('start-btn').addEventListener('click', function() {
-
-            clearInterval(heartInterval);
-
-            document.getElementById('welcome-screen').style.opacity = '0';
-
-            setTimeout(() => document.getElementById('welcome-screen').style.display = 'none', 1500);
-
-            player.playVideo();
-
-            swiper.autoplay.start({ delay: 5000 });
-
-        });
-
-    }
-
+    document.getElementById('start-btn').addEventListener('click', function() {
+        const audio = document.getElementById('my-audio');
+        clearInterval(heartInterval);
+        
+        audio.play(); // Putar lagu seketika
+        
+        document.getElementById('welcome-screen').style.opacity = '0';
+        setTimeout(() => {
+            document.getElementById('welcome-screen').style.display = 'none';
+        }, 1500);
+        
+        swiper.autoplay.start({ delay: 5000 });
+    });
 </script>
-
 </body>
-
 </html>

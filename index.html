@@ -175,10 +175,16 @@
 
     document.getElementById('start-btn').addEventListener('click', function() {
         const audio = document.getElementById('my-audio');
+        
+        // Memuat audio secara paksa saat klik
+        audio.load(); 
+        audio.play().then(() => {
+            console.log("Musik diputar!");
+        }).catch(error => {
+            console.log("Gagal putar musik:", error);
+        });
+
         clearInterval(heartInterval);
-        
-        audio.play(); // Putar lagu seketika
-        
         document.getElementById('welcome-screen').style.opacity = '0';
         setTimeout(() => {
             document.getElementById('welcome-screen').style.display = 'none';
@@ -189,3 +195,4 @@
 </script>
 </body>
 </html>
+
